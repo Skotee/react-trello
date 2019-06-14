@@ -1,6 +1,6 @@
 const initialState = [
     {
-        title: "Zadania na dzisiaj, lista pierwsza",
+        title: "Beginner",
         id: 0,
         tasks: [
             {
@@ -10,6 +10,45 @@ const initialState = [
             {
                 id: 1,
                 text: "drugi opis listy pierwszej"
+            }
+        ]
+    },
+    {
+        title: "Intermediate",
+        id: 1,
+        tasks: [
+            {
+                id: 0,
+                text: "pierwszy opis listy drugiej"
+            },
+            {
+                id: 1,
+                text: "drugi opis listy drugiej"
+            },
+            {
+                id: 2,
+                text: "trzeci opis listy drugiej"
+            }
+        ]
+    },
+    {
+        title: "Advanced",
+        id: 2,
+        tasks: [{
+                id: 0,
+                text: "pierwszy opis listy trzeciej"
+            },
+            {
+                id: 1,
+                text: "drugi opis listy trzeciej"
+            },
+            {
+                id: 2,
+                text: "trzeci opis listy trzeciej"
+            },
+            {
+                id: 3,
+                text: "czwarty opis listy trzeciej"
             }
         ]
     }
