@@ -1,12 +1,38 @@
 import React from "react";
 import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { Draggable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
+import styled from "styled-components"
 
-const Task = () => {
+const TaskStyles = styled.div `
+    overflow: hidden;
+    padding: 2px 6px 2px;
+    position: relative;
+    margin: 4px;
+    font-size: 14px;
+    color: gray;
+`;
+
+const TaskText = styled.div `
+    font-size: 14px;
+    color: gray;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+`;
+
+
+const Task = ({ text }) => {
     return(
-        <>
-        <Card>Test card</Card>
-        <Card>Test card2</Card>
-        </>
+        <div>
+            <TaskStyles>
+                <Card>
+                    <CardContent>
+                        <TaskText>{text}</TaskText>
+                    </CardContent>
+                </Card>
+            </TaskStyles>
+        </div>
     )
 }
 
