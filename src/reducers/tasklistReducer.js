@@ -1,3 +1,4 @@
+import { CONSTANTS } from "../actions";
 
 const initialState = [
     {
@@ -59,6 +60,25 @@ const initialState = [
 const tasklistReducer = (state = initialState, action) => {
     switch (action.type)
     {
+        case CONSTANTS.DRAG_HAPPENED:
+            const newState = [...state];
+            const {
+                    droppableIdStart,
+                    droppableIdEnd,
+                    droppableIndexStart,
+                    droppableIndexEnd,
+                    draggableId
+            } = action.payload;
+
+
+            if(droppableIdStart === droppableIdEnd) {
+                const list = state.find(list => droppableIdStart === list.id);
+                const task = list.tasks.splice(droppableIndexStart, 1);
+                list.tasks.splice(droppableIndexEnd, 0, ...task);
+            }
+
+            return newState;
+
         default:
             return state;
     }

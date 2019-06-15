@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import TaskList from "./components/TaskList";
 import { connect } from "react-redux";
-import styled from "styled-components"
-import { DragDropContext } from "react-beautiful-dnd"
+import styled from "styled-components";
+import { DragDropContext } from "react-beautiful-dnd";
+import { sort } from "./actions";
 
 
 const Column = styled.div `
@@ -11,8 +12,21 @@ const Column = styled.div `
 `;
 
 class App extends Component {
-  onDragEnd =() => {
+  onDragEnd = result => {
+    const {destination, source, draggableId} = result;
+    if(!destination) {
+      return;
+    }
 
+    this.props.dispatch(
+      sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId
+      )
+    )
   };
 
     render() {
