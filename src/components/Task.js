@@ -38,7 +38,6 @@ const Task = ({ text, id, index }) => {
                 </Card>
             </TaskStyles>
         )}
-
         </Draggable>
     )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Task from "./Task";
 import styled from "styled-components";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const ListWrapper = styled.div `
     font-size: 24px;
@@ -23,20 +23,29 @@ const TaskTitle = styled.div `
 `;
 
 
-const TaskList = ({ title, tasks, listID }) => {
+const TaskList = ({ title, tasks, listID, index }) => {
     return(
-        <Droppable droppableId={String(listID)}>
+        <Draggable draggableId={String(listID)} index={index}>
             {provided => (
-            <ListWrapper {...provided.droppableProps} ref={provided.innerRef}>
-                <TaskTitle>{title}</TaskTitle>
-                {tasks.map((task, index) => (
-                    <Task key={task.id} index={index} id={task.id} text={task.text}></Task>
-                ))}
-                {provided.placeholder}
-            </ListWrapper>
+                <ListWrapper
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                        {...provided.dragHandleProps}
+                    >
+                    <Droppable droppableId={String(listID)} type="task">
+                        {provided => (
+                            <div {...provided.droppableProps} ref={provided.ref}>
+                                <TaskTitle>{title}</TaskTitle>
+                                {tasks.map((task, index) => (
+                                    <Task key={task.id} index={index} id={task.id} text={task.text}></Task>
+                                ))}
+                            </div>
+                        )}
+                    </Droppable>
+                </ListWrapper>
             )}
-        </Droppable>
-    )
+        </Draggable>
+    );
 }
 
 export default TaskList;

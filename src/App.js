@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TaskList from "./components/TaskList";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "./actions";
 
 
@@ -13,7 +13,7 @@ const Column = styled.div `
 
 class App extends Component {
   onDragEnd = result => {
-    const {destination, source, draggableId} = result;
+    const {destination, source, draggableId, type} = result;
     if(!destination) {
       return;
     }
@@ -24,7 +24,8 @@ class App extends Component {
         destination.droppableId,
         source.index,
         destination.index,
-        draggableId
+        draggableId,
+        type
       )
     )
   };
@@ -32,22 +33,36 @@ class App extends Component {
     render() {
     const { lists } = this.props;
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <h1>React Trello</h1>
-        <h2>Welcome Board</h2>
-
-        <Column>
-          {lists.map(list => (
-            <TaskList listID={list.id} key={list.id} title={list.title} tasks={list.tasks} />
-          ))}
-        </Column>
-      </DragDropContext>
+        <>
+          <h1>React Trello</h1>
+          <h2>Welcome Board</h2>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="all-lists" direction="horizontal" type = "list">
+            {provided => (
+              <Column
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {lists.map((list,index) => (
+                  <TaskList listID={list.id}
+                    key={list.id}
+                    title={list.title}
+                    tasks={list.tasks}
+                    index={index}
+                  />
+                ))}
+              </Column>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  lists: state.lists
+  lists: state.lists,
+  tasks: state.tasks
 })
 
 export default connect(mapStateToProps) (App);
