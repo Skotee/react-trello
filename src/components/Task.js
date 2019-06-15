@@ -26,15 +26,17 @@ const Task = ({ text, id, index }) => {
     return(
         <Draggable draggableId={String(id)} index={index}>
         {provided => (
-            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <TaskStyles>
+            <TaskStyles
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+            >
                 <Card>
                     <CardContent>
                         <TaskText>{text}</TaskText>
                     </CardContent>
                 </Card>
             </TaskStyles>
-            </div>
         )}
 
         </Draggable>
