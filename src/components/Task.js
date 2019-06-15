@@ -22,9 +22,11 @@ const TaskText = styled.div `
 `;
 
 
-const Task = ({ text }) => {
+const Task = ({ text, id, index }) => {
     return(
-        <div>
+        <Draggable draggableId={String(id)} index={index}>
+        {provided => (
+            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <TaskStyles>
                 <Card>
                     <CardContent>
@@ -32,7 +34,10 @@ const Task = ({ text }) => {
                     </CardContent>
                 </Card>
             </TaskStyles>
-        </div>
+            </div>
+        )}
+
+        </Draggable>
     )
 }
 
