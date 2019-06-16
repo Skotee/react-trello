@@ -1,5 +1,3 @@
-![React-Trello]
-
 # React-Trello
 
 > Simple trello-like website, with drag and drop functionality used on tasks and tasklists
