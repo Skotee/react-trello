@@ -2,7 +2,6 @@ import React from "react";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Draggable } from "react-beautiful-dnd";
-import { connect } from "react-redux";
 import styled from "styled-components"
 
 const TaskStyles = styled.div `

@@ -8,12 +8,11 @@ const ListWrapper = styled.div `
     background-color: #dfe1e6;
     border-radius: 3px;
     width: 272px;
-    margin: 10px 10px;
+    margin: 10px 7px;
     height: 100%;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
-    white-space: nowrap;
 `;
 
 const TaskTitle = styled.div `
@@ -34,7 +33,7 @@ const TaskList = ({ title, tasks, listID, index }) => {
                     >
                     <Droppable droppableId={String(listID)} type="task">
                         {provided => (
-                            <div {...provided.droppableProps} ref={provided.ref}>
+                            <div {...provided.droppableProps} ref={provided.innerRef}>
                                 <TaskTitle>{title}</TaskTitle>
                                 {tasks.map((task, index) => (
                                     <Task key={task.id} index={index} id={task.id} text={task.text}></Task>
@@ -46,9 +45,6 @@ const TaskList = ({ title, tasks, listID, index }) => {
             )}
         </Draggable>
     );
-}
+};
 
 export default TaskList;
-
-    // display: flex;
-    // flex-direction: column;

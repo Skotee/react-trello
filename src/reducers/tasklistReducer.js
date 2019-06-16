@@ -67,16 +67,15 @@ const tasklistReducer = (state = initialState, action) => {
                     droppableIdEnd,
                     droppableIndexStart,
                     droppableIndexEnd,
-                    draggableId,
                     type
             } = action.payload;
 
 //dragging list around
-if(type==="list") {
-    const list = newState.splice(droppableIndexStart,1);
-    newState.splice(droppableIndexEnd,0,...list);
-    return newState;
-}
+            if(type === "list") {
+                const list = newState.splice(droppableIndexStart,1);
+                newState.splice(droppableIndexEnd,0,...list);
+                return newState;
+            }
 
 //in the same list
             if(droppableIdStart === droppableIdEnd) {
@@ -86,7 +85,6 @@ if(type==="list") {
             }
 
 //in the other list
-
             if(droppableIdStart !== droppableIdEnd) {
                 //find the list where drag happended
                 const listStart = state.find(list => droppableIdStart === list.id)
@@ -98,12 +96,9 @@ if(type==="list") {
                 const listEnd = state.find(list => droppableIdEnd === list.id);
 
                 //put the task in the new list
-
                 listEnd.tasks.splice(droppableIndexEnd,0,...task);
             }
-
             return newState;
-
         default:
             return state;
     }
